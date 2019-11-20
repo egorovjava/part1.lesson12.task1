@@ -3,8 +3,7 @@
 <%@ page import="javax.naming.NamingException" %>
 <%@ page import="com.gmail.egorovsonalexey.Tree" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Stack" %>
-<%@ page import="com.gmail.egorovsonalexey.MyService" %>
+<%@ page import="java.util.ArrayDeque" %>
 <!DOCTYPE html>
 <html>
 <body>
@@ -20,13 +19,13 @@
     }
 
     Tree<String> fileTree = localService.getFileTree();
-    Stack<List<Tree.Node<String>>> treePath = new Stack<>();
+    ArrayDeque<List<Tree.Node<String>>> treePath = new ArrayDeque<>();
     treePath.push(fileTree.getRoot().getChildren());
-    while (!treePath.empty()) {
+    while (!treePath.isEmpty()) {
         List<Tree.Node<String>> ch = treePath.peek();
         if(ch.size() == 0) {
             treePath.pop();
-            if(!treePath.empty()) {
+            if(!treePath.isEmpty()) {
                 out.println("</ul>");
                 out.println("</details></li>");
             }

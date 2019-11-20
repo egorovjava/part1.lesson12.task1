@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayDeque;
 import java.util.List;
-import java.util.Stack;
 
 public class MyServlet extends HttpServlet {
 
@@ -26,15 +26,14 @@ public class MyServlet extends HttpServlet {
         }
 
         PrintWriter writer = resp.getWriter();
-
         writer.println("<!DOCTYPE html>");
         writer.println("<html>");
 
         Tree<String> fileTree = localService.getFileTree();
 
-        Stack<List<Tree.Node<String>>> treePath = new Stack<>();
+        ArrayDeque<List<Tree.Node<String>>> treePath = new ArrayDeque<>();
         treePath.push(fileTree.getRoot().getChildren());
-        while (!treePath.empty()) {
+        while (treePath.size() != 0) {
             List<Tree.Node<String>> ch = treePath.peek();
             if(ch.size() == 0) {
                 treePath.pop();

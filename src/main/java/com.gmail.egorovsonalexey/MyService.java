@@ -2,9 +2,7 @@ package com.gmail.egorovsonalexey;
 
 import javax.ejb.Stateless;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Stack;
 
 @Stateless(name="myservice")
 public class MyService implements MyLocalService {
